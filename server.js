@@ -28,9 +28,12 @@ fastify.register(cargoRoutes, { prefix: '/api/v1' })
 
 // Iniciar servidor
 const start = async () => {
+  const port = process.env.PORT || 3000;
   try {
-     fastify.listen({ port: 3000 });
-    console.log('Servidor corriendo en http://localhost:3000');
+    await fastify.listen({ port: Number(port), host: "0.0.0.0" });
+    console.log(
+      "API Modular con ES Modules corriendo en http://localhost:3000",
+    );
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);
